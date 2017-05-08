@@ -285,7 +285,7 @@ if (typeof(SDP) == "undefined")
                 });
             }
 
-            if (hasMediaStreamId) {
+            if (true /*hasMediaStreamId*/) {
                 var msid = match(mblock, regexps.msid, "m");
                 if (msid) {
                     mediaDescription.mediaStreamId = msid[2];
