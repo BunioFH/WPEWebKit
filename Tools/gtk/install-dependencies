@@ -180,6 +180,7 @@ function installDependenciesWithApt {
         libjson-glib-dev \
         libinput-dev \
         libmtdev-dev \
+        liborc-0.4-dev \
         libp11-kit-dev \
         libpciaccess-dev \
         libproxy-dev \
@@ -329,6 +330,7 @@ function installDependenciesWithPacman {
         libxcb \
         libxkbfile \
         mtdev \
+        orc \
         python2 \
         python2-lxml \
         ragel \
@@ -457,6 +459,7 @@ function installDependenciesWithDnf {
         libxkbfile-devel \
         mesa-libEGL-devel \
         mtdev-devel \
+        orc-devel \
         ragel \
         systemd-devel \
         xorg-x11-font-utils \
