@@ -586,7 +586,7 @@ void MediaEndpointOwr::ensureTransportAgentAndTransceivers(bool isInitiator, con
             ASSERT_NOT_REACHED();
         };
 
-        m_transportAgent = owr_transport_agent_new(false, bundlePolicy);
+        m_transportAgent = owr_transport_agent_new(false, OWR_BUNDLE_POLICY_TYPE_MAX_BUNDLE);
 
         ASSERT(m_configuration);
         for (auto& server : m_configuration->iceServers) {
