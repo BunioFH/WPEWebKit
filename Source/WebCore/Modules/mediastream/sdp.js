@@ -51,7 +51,7 @@ if (typeof(SDP) == "undefined")
         "rtcp": "^a=rtcp:([\\d]+)( IN (IP[46]) ([\\d\\.a-f\\:]+))?.*$",
         "rtcpmux": "^a=rtcp-mux.*$",
         "cname": "^a=ssrc:(\\d+) cname:([\\w+/\\-@\\.\\{\\}]+).*$",
-        "msid": "^a=(ssrc:\\d+ )?msid:([\\w+/\\-=]+) +([\\w+/\\-=]+).*$",
+        "msid": "^a=ssrc:(\\d+) msid:([\\w+/\\-=]+) +([\\w+/\\-=]+).*$",
         "ufrag": "^a=ice-ufrag:([\\w+/]*).*$",
         "pwd": "^a=ice-pwd:([\\w+/]*).*$",
         "candidate": "^a=candidate:(\\d+) (\\d) (UDP|TCP) ([\\d\\.]*) ([\\d\\.a-f\\:]*) (\\d*)" +
@@ -108,7 +108,7 @@ if (typeof(SDP) == "undefined")
         "ericscream": "a=rtcp-fb:${type} ericscream\r\n",
 
         "cname": "a=ssrc:${ssrc} cname:${cname}\r\n",
-        "msid": "a=msid:${mediaStreamId} ${mediaStreamTrackId}\r\n",
+        "msid": "a=ssrc:${ssrc} msid:${mediaStreamId} ${mediaStreamTrackId}\r\n",
 
         "iceCredentials":
             "a=ice-ufrag:${ufrag}\r\n" +
