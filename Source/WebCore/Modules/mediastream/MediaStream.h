@@ -65,7 +65,7 @@ public:
 
     static Ref<MediaStream> create(ScriptExecutionContext&);
     static Ref<MediaStream> create(ScriptExecutionContext&, MediaStream&);
-    static Ref<MediaStream> create(ScriptExecutionContext&, const MediaStreamTrackVector&);
+    static Ref<MediaStream> create(ScriptExecutionContext&, const MediaStreamTrackVector&, const String& = String());
     static Ref<MediaStream> create(ScriptExecutionContext&, RefPtr<MediaStreamPrivate>&&);
     virtual ~MediaStream();
 
@@ -103,7 +103,7 @@ public:
     void removeObserver(Observer*);
 
 protected:
-    MediaStream(ScriptExecutionContext&, const MediaStreamTrackVector&);
+    MediaStream(ScriptExecutionContext&, const MediaStreamTrackVector&, const String& = String());
     MediaStream(ScriptExecutionContext&, RefPtr<MediaStreamPrivate>&&);
 
     // ContextDestructionObserver

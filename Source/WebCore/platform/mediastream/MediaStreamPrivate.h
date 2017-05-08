@@ -69,7 +69,7 @@ public:
     };
 
     static Ref<MediaStreamPrivate> create(const Vector<Ref<RealtimeMediaSource>>& audioSources, const Vector<Ref<RealtimeMediaSource>>& videoSources);
-    static Ref<MediaStreamPrivate> create(const MediaStreamTrackPrivateVector&);
+    static Ref<MediaStreamPrivate> create(const MediaStreamTrackPrivateVector&, const String& = String());
 
     virtual ~MediaStreamPrivate();
 

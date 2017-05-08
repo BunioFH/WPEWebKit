@@ -537,7 +537,7 @@ void MediaEndpointPeerConnection::setRemoteDescriptionTask(RefPtr<RTCSessionDesc
                     stream->addTrack(*receiver.track());
                     trackEventMediaStreams.add(id, WTFMove(stream));
                 } else {
-                    auto newStream = MediaStream::create(*m_peerConnection.scriptExecutionContext(), MediaStreamTrackVector({ receiver.track() }));
+                    auto newStream = MediaStream::create(*m_peerConnection.scriptExecutionContext(), MediaStreamTrackVector({ receiver.track() }), id);
                     m_remoteStreamMap.add(id, newStream.copyRef());
                     legacyMediaStreamEvents.append(MediaStreamEvent::create(eventNames().addstreamEvent, false, false, newStream.copyRef()));
                     trackEventMediaStreams.add(id, WTFMove(newStream));

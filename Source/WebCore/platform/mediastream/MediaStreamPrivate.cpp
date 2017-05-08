@@ -59,9 +59,9 @@ Ref<MediaStreamPrivate> MediaStreamPrivate::create(const Vector<Ref<RealtimeMedi
     return MediaStreamPrivate::create(tracks);
 }
 
-Ref<MediaStreamPrivate> MediaStreamPrivate::create(const MediaStreamTrackPrivateVector& tracks)
+Ref<MediaStreamPrivate> MediaStreamPrivate::create(const MediaStreamTrackPrivateVector& tracks, const String &id)
 {
-    return adoptRef(*new MediaStreamPrivate(createCanonicalUUIDString(), tracks));
+    return adoptRef(*new MediaStreamPrivate(id.isNull() ? createCanonicalUUIDString() : id, tracks));
 }
 
 MediaStreamPrivate::MediaStreamPrivate(const String& id, const MediaStreamTrackPrivateVector& tracks)

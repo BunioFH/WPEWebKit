@@ -52,9 +52,9 @@ Ref<MediaStream> MediaStream::create(ScriptExecutionContext& context, MediaStrea
     return adoptRef(*new MediaStream(context, stream.getTracks()));
 }
 
-Ref<MediaStream> MediaStream::create(ScriptExecutionContext& context, const MediaStreamTrackVector& tracks)
+Ref<MediaStream> MediaStream::create(ScriptExecutionContext& context, const MediaStreamTrackVector& tracks, const String& id)
 {
-    return adoptRef(*new MediaStream(context, tracks));
+    return adoptRef(*new MediaStream(context, tracks, id));
 }
 
 Ref<MediaStream> MediaStream::create(ScriptExecutionContext& context, RefPtr<MediaStreamPrivate>&& streamPrivate)
@@ -62,7 +62,7 @@ Ref<MediaStream> MediaStream::create(ScriptExecutionContext& context, RefPtr<Med
     return adoptRef(*new MediaStream(context, WTFMove(streamPrivate)));
 }
 
-MediaStream::MediaStream(ScriptExecutionContext& context, const MediaStreamTrackVector& tracks)
+MediaStream::MediaStream(ScriptExecutionContext& context, const MediaStreamTrackVector& tracks, const String& id)
     : ContextDestructionObserver(&context)
     , m_activityEventTimer(*this, &MediaStream::activityEventTimerFired)
 {
@@ -77,7 +77,7 @@ MediaStream::MediaStream(ScriptExecutionContext& context, const MediaStreamTrack
         trackPrivates.append(&track->privateTrack());
     }
 
-    m_private = MediaStreamPrivate::create(trackPrivates);
+    m_private = MediaStreamPrivate::create(trackPrivates, id);
     setIsActive(m_private->active());
     m_private->addObserver(*this);
     MediaStreamRegistry::shared().registerStream(*this);
