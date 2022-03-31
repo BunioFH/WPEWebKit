@@ -1929,6 +1929,18 @@ void AccessibilityNodeObject::visibleText(Vector<AccessibilityText>& textOrder) 
         if (!text.isEmpty())
             textOrder.append(AccessibilityText(WTFMove(text), AccessibilityTextSource::Children));
     }
+
+    if(textOrder.size() == 0 && this->isTableRow()) {
+        AccessibilityObject* axObject = previousSibling();
+        if (axObject && axObject->isHeading()) {
+            TextUnderElementMode mode;
+            mode.includeFocusableContent = true;
+            String text = axObject->textUnderElement(mode);
+            if (!text.isEmpty()) {
+                textOrder.append(AccessibilityText(text, AccessibilityTextSource::Children));
+            }
+        }
+    }
 }
 
 void AccessibilityNodeObject::helpText(Vector<AccessibilityText>& textOrder) const
