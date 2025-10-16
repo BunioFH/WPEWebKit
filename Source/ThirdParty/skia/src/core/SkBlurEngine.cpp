@@ -896,7 +896,7 @@ public:
         // to zero means it'll never be used for 8888 color types.
         static constexpr float kBoxBlurMinSigma = 0.f;
 #else
-        static constexpr float kBoxBlurMinSigma = 2.f;
+        static constexpr float kBoxBlurMinSigma = 1.5f;
 
         // If the sigma is larger than kBoxBlurMinSigma, we should assume that we won't encounter
         // an identity window assertion later on.
