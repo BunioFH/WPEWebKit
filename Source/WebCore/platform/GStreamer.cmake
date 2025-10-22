@@ -189,6 +189,13 @@ if (ENABLE_SPEECH_SYNTHESIS)
         )
         list(APPEND WebCore_LIBRARIES
             ${Flite_LIBRARIES}
+          )
+    elseif (USE_TTS_CLIENT)
+        list(APPEND WebCore_LIBRARIES
+            TTSClient
+        )
+        list(APPEND WebCore_SOURCES
+            platform/ttsclient/PlatformSpeechSynthesizerTTSClient.cpp
         )
     endif ()
 endif ()

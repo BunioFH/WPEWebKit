@@ -118,6 +118,7 @@ WEBKIT_OPTION_DEFINE(USE_SYSPROF_CAPTURE "Whether to use libsysprof-capture for 
 # Private options specific to the WPE port.
 WEBKIT_OPTION_DEFINE(USE_EXTERNAL_HOLEPUNCH "Whether to enable external holepunch" PRIVATE OFF)
 WEBKIT_OPTION_DEFINE(USE_SPIEL "Whether to enable usage of LibSpiel for speech synthesis." PRIVATE OFF)
+WEBKIT_OPTION_DEFINE(USE_TTS_CLIENT "Whether to use TTSClient API for SpeechSynthesis" PRIVATE OFF)
 WEBKIT_OPTION_DEFINE(USE_LINUX_FTRACE "Whether to use ftrace based webkit tracing" PRIVATE OFF)
 WEBKIT_OPTION_DEFINE(USE_SYSTEM_LIBDEX "Whether to use a system-provided libdex." PUBLIC OFF)
 WEBKIT_OPTION_DEFINE(USE_SYSTEM_SYSPROF_CAPTURE "Whether to use a system-provided libsysprof-capture" PRIVATE OFF)
@@ -238,8 +239,9 @@ if (ENABLE_SPEECH_SYNTHESIS)
             message(FATAL_ERROR "Flite is needed for ENABLE_SPEECH_SYNTHESIS")
         endif ()
         SET_AND_EXPOSE_TO_BUILD(USE_FLITE ON)
+    elseif (USE_TTS_CLIENT)
     else ()
-        message(FATAL_ERROR "Either USE_SPIEL or USE_FLITE is needed for ENABLE_SPEECH_SYNTHESIS")
+        message(FATAL_ERROR "Either USE_SPIEL or USE_FLITE or USE_TTS_CLIENT is needed for ENABLE_SPEECH_SYNTHESIS")
     endif ()
 endif ()
 
