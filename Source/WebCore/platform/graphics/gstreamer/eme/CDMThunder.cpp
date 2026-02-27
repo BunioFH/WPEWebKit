@@ -280,7 +280,8 @@ CDMInstanceSessionThunder::CDMInstanceSessionThunder(CDMInstanceThunder& instanc
     m_thunderSessionCallbacks.process_challenge_callback = [](OpenCDMSession*, void* userData, const char[], const uint8_t challenge[],
         const uint16_t challengeLength) {
         GST_DEBUG("Got 'challenge' OCDM notification with length %hu", challengeLength);
-        ASSERT(challengeLength > 0);
+        // Persistent license loading can generate a challenge with length 0.
+        // ASSERT(challengeLength > 0);
         callOnMainThread([session = WeakPtr { static_cast<CDMInstanceSessionThunder*>(userData) }, buffer = WebCore::SharedBuffer::create(challenge,
             challengeLength)]() mutable {
             if (!session)
@@ -366,6 +367,10 @@ private:
 
 void CDMInstanceSessionThunder::challengeGeneratedCallback(RefPtr<SharedBuffer>&& buffer)
 {
+    if (!buffer->size()) {
+        GST_DEBUG("empty response");
+        return;
+    }
     ParsedResponseMessage parsedResponseMessage(buffer);
     if (!parsedResponseMessage) {
         GST_ERROR("response message parsing failed");
@@ -694,6 +699,8 @@ void CDMInstanceSessionThunder::loadSession(LicenseType licenseType, const Strin
         GST_DEBUG("loading failed. OpenCDMError: %" PRIu32, static_cast<uint32_t>(result));
         sessionFailure();
     }
+
+    GST_TRACE("session %s loaded. OpenCDMError: %" PRIu32, m_sessionID.utf8().data(), static_cast<uint32_t>(result));
 }
 
 void CDMInstanceSessionThunder::closeSession(const String& sessionID, CloseSessionCallback&& callback)
